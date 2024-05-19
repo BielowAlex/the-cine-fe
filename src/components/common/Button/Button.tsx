@@ -30,7 +30,7 @@ const Button: FC<IProps> = ({ children, href, handleClick, className }) => {
       onClick={handleClick}
       className={cn(
         className,
-        "flex justify-center gap-2 items-center text-base p-[5px] text-amber-500 border border-amber-500 rounded-md hover:opacity-[0.5] ease-linear duration-75"
+        "flex justify-center gap-2 items-center text-base p-[5px] text-amber-500 border border-amber-500 rounded-md hover:bg-amber-500 hover:text-inherit ease-linear duration-300"
       )}
     >
       {children}
