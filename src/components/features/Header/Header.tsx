@@ -16,7 +16,6 @@ const Header: FC = () => {
           >
             Genres
           </Link>
-
           <Link
             href="/movies"
             className="text-white text-base  hover:opacity-[0.5] ease-linear duration-75"

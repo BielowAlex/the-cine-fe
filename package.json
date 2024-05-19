@@ -30,6 +30,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.1",
     "autoprefixer": "^10.4.19",
+    "axios": "^1.6.8",
     "classnames": "^2.5.1",
     "next": "14.2.3",
     "normalize.css": "^8.0.1",
