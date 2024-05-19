@@ -2,45 +2,35 @@ import React, { FC } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { faTicket } from "@fortawesome/free-solid-svg-icons";
+import { Button, Logo } from "@/components";
 
 const Header: FC = () => {
   return (
-    <header className="w-full flex justify-center">
+    <header className="w-full flex justify-center fixed top-0 left-0 z-50 bg-black">
       <div className="container justify-between p-5 flex items-center">
-        <Link
-          href="/"
-          className="text-amber-500 font-extrabold uppercase flex justify-center items-center gap-2"
-        >
-          <span className="whitespace-nowrap">The Cine</span>{" "}
-          <FontAwesomeIcon icon={faTicket} className="w-[20px] h-[20px]" />
-        </Link>
-
-        <div className="flex items-center justify-center gap-5">
+        <Logo />
+        <nav className="flex items-center justify-center gap-5">
           <Link
             href="/genres"
-            className="text-white text-base hover:text-amber-500 duration-75 ease-linear"
+            className="text-white text-base  hover:opacity-[0.5] ease-linear duration-75"
           >
             Genres
           </Link>
 
           <Link
             href="/movies"
-            className="text-white text-base hover:text-amber-500 duration-75 ease-linear"
+            className="text-white text-base  hover:opacity-[0.5] ease-linear duration-75"
           >
             Movies
           </Link>
-          <Link
-            href="/auth"
-            className="text-white hover:text-amber-500 duration-75 ease-linear flex w-fit gap-1 justify-between items-center text-base"
-          >
+          <Button href="/auth">
             <span className="block w-fit whitespace-nowrap">Sign-in</span>{" "}
             <FontAwesomeIcon
               icon={faGoogle}
               className="text-base w-[20px] h-[20px]"
             />
-          </Link>
-        </div>
+          </Button>
+        </nav>
       </div>
     </header>
   );
