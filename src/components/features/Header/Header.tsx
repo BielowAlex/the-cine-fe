@@ -6,7 +6,7 @@ import { Button, Logo } from "@/components";
 
 const Header: FC = () => {
   return (
-    <header className="w-full flex justify-center fixed top-0 left-0 z-50 bg-black">
+    <header className="w-full flex justify-center fixed top-0 left-0 z-[9999] bg-[rgb(0,0,0,0.5)]">
       <div className="container justify-between p-5 flex items-center">
         <Logo />
         <nav className="flex items-center justify-center gap-5">
