@@ -9,7 +9,7 @@ interface IProps {
 
 const MovieList: FC<IProps> = ({ movieList }) => {
   return (
-    <div className="flex p-2 flex-wrap justify-around content-center gap-10">
+    <div className="flex p-2 flex-wrap justify-stretch content-center gap-10">
       {movieList?.length > 0 &&
         movieList.map((movie) => (
           <MovieCard
