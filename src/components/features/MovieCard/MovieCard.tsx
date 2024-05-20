@@ -1,28 +1,41 @@
-import React, { FC } from "react";
+"use client";
+
+import React, { FC, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { LikeButton } from "@/components/ui/LikeButton";
 
 interface IProps {
-  id: string;
+  id: number;
   title: string;
   poster: string;
 }
 
 const MovieCard: FC<IProps> = ({ id, title, poster }) => {
+  const [isSaved, setIsSaved] = useState<boolean>(false);
+
   return (
-    <div
-      className="relative min-w-[320px] min-h-[450px] rounded-2xl overflow-hidden border border-black hover:border-amber-500 duration-75 ease-linear cursor-pointer"
-      id={id}
-    >
-      <h4 className="absolute z-20 bottom-5 left-5 uppercase font-bold">
-        {title}
-      </h4>
-      <Image
-        width={320}
-        height={450}
-        src={poster}
-        alt={title}
-        className="absolute z-10 left-0 top-0 object-cover w-full h-full hover:opacity-[0.5] duration-75 ease-linear"
+    <div className="relative min-w-[320px] min-h-[450px] rounded-2xl overflow-hidden border border-black hover:border-amber-500 duration-75 ease-linear cursor-pointer">
+      <LikeButton
+        isSaved={isSaved}
+        handleClick={() => setIsSaved((prev) => !prev)}
+        className="absolute right-[15px] top-[5px] z-50"
       />
+      <Link
+        href={`/movies/${id}`}
+        className=" relative block min-w-full min-h-full  "
+      >
+        <h4 className="absolute z-20 bottom-0 left-0 w-[320px] p-2 uppercase font-bold shadow-[inset_-1px_1px_40px_rgba(0,0,0,0.6)]">
+          {title}
+        </h4>
+        <Image
+          width={320}
+          height={450}
+          src={poster}
+          alt={title}
+          className="absolute z-10 left-0 top-0 object-cover w-full h-full hover:opacity-[0.5] duration-75 ease-linear "
+        />
+      </Link>
     </div>
   );
 };
