@@ -13,7 +13,7 @@ interface IProps {
 const LikeButton: FC<IProps> = ({ className, handleClick, isSaved }) => {
   return (
     <button
-      className={cn("w-[20px] h-[20px]", className)}
+      className={cn("w-[25px] h-[25px]", className)}
       onClick={handleClick}
     >
       {isSaved ? (
