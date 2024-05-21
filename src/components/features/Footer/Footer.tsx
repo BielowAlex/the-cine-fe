@@ -9,7 +9,10 @@ const Footer: FC = () => {
       <div className="container flex flex-col justify-center items-center p-[50px] text-md">
         <p>
           Made with{" "}
-          <FontAwesomeIcon icon={faHeart} className="text-amber-500" />
+          <FontAwesomeIcon
+            icon={faHeart}
+            className=" inline text-amber-500 w-[20px]"
+          />
         </p>
         <Link href="https://alex-bielow.vercel.app/" target="_blank">
           by AlexBielow

@@ -1,13 +1,13 @@
 import axios, { AxiosInstance } from "axios";
 import { movieBaseUrl, movieUrls } from "@/contants";
 import { AxiosRes } from "@/types/common.types";
-import { Movie, Pagination } from "@/types/movies.types";
+import { Movie, MovieFull, Pagination } from "@/types/movies.types";
 
 export const MovieApi: AxiosInstance = axios.create({ baseURL: movieBaseUrl });
 
 MovieApi.interceptors.request.use(
   (config) => {
-    const token = process.env.APP_TMDB_TOKEN;
+    const token = process.env.NEXT_PUBLIC_APP_TMDB_TOKEN;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -21,5 +21,8 @@ MovieApi.interceptors.request.use(
 export const MoviesService = {
   getTrending: (): AxiosRes<Pagination<Movie[]>> =>
     MovieApi.get(movieUrls.trending),
-  getImage: (id: string): string => `${process.env.APP_TMDB_IMAGES_URL}${id}`
+  getImage: (id: string): string =>
+    `${process.env.NEXT_PUBLIC_APP_TMDB_IMAGES_URL}${id}`,
+  getById: (id: string): AxiosRes<MovieFull> =>
+    MovieApi.get(movieUrls.getById(id))
 };
