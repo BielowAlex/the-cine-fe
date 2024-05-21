@@ -7,7 +7,7 @@
  * @param num - The number to be formatted.
  * @returns A string representing the formatted number.
  */
-export const formatNumber = (num: number): string => {
+export const FormatVoteNumber = (num: number): string => {
   if (num < 1000) {
     return num.toString();
   }
