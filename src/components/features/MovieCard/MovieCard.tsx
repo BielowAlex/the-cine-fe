@@ -4,18 +4,25 @@ import React, { FC, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { LikeButton } from "@/components/ui/LikeButton";
+import cn from "classnames";
 
 interface IProps {
   id: number;
   title: string;
   poster: string;
+  className?: string;
 }
 
-const MovieCard: FC<IProps> = ({ id, title, poster }) => {
+const MovieCard: FC<IProps> = ({ id, title, poster, className }) => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   return (
-    <div className="relative min-w-[320px] min-h-[450px] rounded-2xl overflow-hidden border border-black hover:border-amber-500 duration-75 ease-linear cursor-pointer">
+    <div
+      className={cn(
+        "relative w-[320px] h-[450px] rounded-2xl overflow-hidden border border-black hover:border-amber-500 duration-75 ease-linear cursor-pointer",
+        className
+      )}
+    >
       <LikeButton
         isSaved={isSaved}
         handleClick={() => setIsSaved((prev) => !prev)}
@@ -33,7 +40,7 @@ const MovieCard: FC<IProps> = ({ id, title, poster }) => {
           height={450}
           src={poster}
           alt={title}
-          className="absolute z-10 left-0 top-0 object-cover w-full h-full hover:opacity-[0.5] duration-75 ease-linear "
+          className="absolute z-10 left-0 top-0 object-cover w-full min-h-[450px] hover:opacity-[0.5] duration-75 ease-linear "
         />
       </Link>
     </div>

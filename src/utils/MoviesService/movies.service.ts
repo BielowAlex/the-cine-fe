@@ -24,5 +24,6 @@ export const MoviesService = {
   getImage: (id: string): string =>
     `${process.env.NEXT_PUBLIC_APP_TMDB_IMAGES_URL}${id}`,
   getById: (id: string): AxiosRes<MovieFull> =>
-    MovieApi.get(movieUrls.getById(id))
+    MovieApi.get(movieUrls.getById(id)),
+  getSimilarMovie: (id: string) => MovieApi.get(movieUrls.getSimilar(id))
 };

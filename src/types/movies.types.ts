@@ -78,6 +78,24 @@ export interface MovieFull {
   tagline: string;
   title: string;
   video: boolean;
+  videos: Videos;
   vote_average: number;
   vote_count: number;
+}
+
+export interface Video {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
+
+export interface Videos {
+  results: Video[];
 }
