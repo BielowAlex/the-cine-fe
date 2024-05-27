@@ -3,20 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { convertMinutesToHoursMinutes, MoviesService } from "@/utils";
 import { Movie, MovieFull, Pagination, Video } from "@/types";
-import { LikeButton, MovieCard } from "@/components";
+import { LikeButton } from "@/components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FormatVoteNumber } from "@/utils/FormatVoteNumber";
 import Image from "next/image";
 import YouTube from "react-youtube";
-import {
-  A11y,
-  Navigation,
-  Pagination as SwiperPagination,
-  Scrollbar
-} from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import { MovieSlider } from "@/components/features/MovieSlider";
 
 const MoviePage = () => {
   const [movie, setMovie] = useState<MovieFull>();
@@ -37,6 +30,8 @@ const MoviePage = () => {
     if (typeof params.id === "string") {
       MoviesService.getById(params.id).then(({ data }) => {
         setMovie(data);
+
+        console.log(data);
 
         setCurrentTrailer(
           data?.videos.results?.find((el) => el.type === "Trailer") ||
@@ -147,52 +142,10 @@ const MoviePage = () => {
               </ul>
             </div>
           </div>
-          <div className="w-full flex flex-col justify-center items-start gap-5 relative max-h-[500px] overflow-hidden">
-            <h2 className=" font-extrabold text-3xl">Recommendations:</h2>
-
-            <Swiper
-              modules={[Navigation, SwiperPagination, Scrollbar, A11y]}
-              slidesPerView={4}
-              navigation={true}
-              centeredSlides={false}
-              grabCursor={true}
-              breakpoints={{
-                0: {
-                  slidesPerView: 1,
-                  spaceBetween: 20
-                },
-                500: {
-                  slidesPerView: 2,
-                  spaceBetween: 20
-                },
-                768: {
-                  slidesPerView: 3,
-                  spaceBetween: 40
-                },
-                1024: {
-                  slidesPerView: 4,
-                  spaceBetween: 50
-                },
-                1280: {
-                  slidesPerView: 5,
-                  spaceBetween: 20
-                }
-              }}
-              className="w-full h-full"
-            >
-              {similarMovieList.total_results > 0 &&
-                similarMovieList.results.map((movie) => (
-                  <SwiperSlide key={movie.id}>
-                    <MovieCard
-                      id={movie.id}
-                      title={movie.title}
-                      poster={MoviesService.getImage(movie.poster_path)}
-                      className="!w-[220px] !h-[350px]"
-                    />
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          </div>
+          <MovieSlider
+            title={"Recommendation"}
+            movieList={similarMovieList.results}
+          />
         </div>
       </section>
     )
