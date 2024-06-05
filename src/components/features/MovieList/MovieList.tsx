@@ -1,3 +1,4 @@
+"use client";
 import React, { FC } from "react";
 import { MoviesService } from "@/utils";
 import { Movie } from "@/types";

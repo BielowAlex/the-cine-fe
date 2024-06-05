@@ -6,6 +6,7 @@ import { MovieList } from "@/components";
 const getTrendingMovieList = async (): Promise<Pagination<Movie[]>> => {
   try {
     const res = await MoviesService.getTrending();
+
     return res.data;
   } catch (e) {
     return {
