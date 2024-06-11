@@ -35,6 +35,7 @@ const MovieCard: FC<IProps> = ({ id, title, poster, className }) => {
         <h4 className="absolute z-20 bottom-0 left-0 w-full p-2 uppercase font-bold shadow-[inset_-1px_1px_40px_rgba(0,0,0,0.6)] whitespace-nowrap overflow-hidden overflow-ellipsis">
           {title}
         </h4>
+        {/*TODO: */}
         <Image
           width={320}
           height={450}

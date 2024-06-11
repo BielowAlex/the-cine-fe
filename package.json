@@ -12,16 +12,7 @@
     "lint": "next lint",
     "prettier": "prettier --write nextjs-example",
     "test": "jest",
-    "test:watch": "jest --watchAll",
-    "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,css,md}": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "*.js": "eslint --cache --fix"
+    "test:watch": "jest --watchAll"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
