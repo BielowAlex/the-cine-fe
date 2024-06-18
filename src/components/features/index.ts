@@ -5,3 +5,4 @@ export * from "./MovieCard";
 export * from "./MovieList";
 export * from "./Footer";
 export * from "./Logo";
+export * from "./Genres";
