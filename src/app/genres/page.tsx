@@ -28,7 +28,7 @@ const Page = () => {
 
       updateMovieList(data);
     });
-  }, [currentGenre, page, router, pathname]);
+  }, [currentGenre, page, router, pathname, movieList, updateMovieList]);
 
   useEffect(() => {
     setPage(+initialPage);
