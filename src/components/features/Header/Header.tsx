@@ -11,6 +11,12 @@ const Header: FC = () => {
         <Logo />
         <nav className="flex items-center justify-center gap-5">
           <Link
+            href="/genres"
+            className="text-white text-base  hover:opacity-[0.5] ease-linear duration-75"
+          >
+            Genres
+          </Link>
+          <Link
             href="/movies"
             className="text-white text-base  hover:opacity-[0.5] ease-linear duration-75"
           >
