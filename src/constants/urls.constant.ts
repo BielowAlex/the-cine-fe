@@ -8,5 +8,5 @@ export const movieUrls = {
   searchMovie: `/search/movie`,
   genreList: "/genre/movie/list",
   getByGenre: (genreId: number | string) =>
-    `/discover/movie?with_genre=${genreId}`
+    `/discover/movie?with_genres=${genreId}`
 };
