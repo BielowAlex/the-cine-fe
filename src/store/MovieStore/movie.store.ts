@@ -1,11 +1,13 @@
 "use client";
 import { create } from "zustand";
-import { Movie } from "@/types";
+import { Genre, Movie } from "@/types";
 
 export interface IMovieStoreState {
   movies: {
     trendingMovies: Movie[];
     savedMovies: Movie[];
+    movieByGenre: Movie[];
+    currentGenre: Genre;
   };
   // eslint-disable-next-line no-unused-vars
   updateTrendingList: (newTrendingMovie: Movie[]) => void;
@@ -13,12 +15,21 @@ export interface IMovieStoreState {
   updateSavedList: (savedMovies: Movie[]) => void;
   // eslint-disable-next-line no-unused-vars
   saveMovie: (movie: Movie) => void;
+  // eslint-disable-next-line no-unused-vars
+  updateMovieByGenre: (movie: Movie[]) => void;
+  // eslint-disable-next-line no-unused-vars
+  updateCurrentGenre: (genre: Genre) => void;
 }
 
 export const movieStore = create<IMovieStoreState>((set) => ({
   movies: {
     trendingMovies: [],
-    savedMovies: []
+    savedMovies: [],
+    movieByGenre: [],
+    currentGenre: {
+      id: 28,
+      name: "Action"
+    }
   },
   updateTrendingList: (newTrendingMovie: Movie[]) =>
     set((state: IMovieStoreState) => ({
@@ -33,6 +44,20 @@ export const movieStore = create<IMovieStoreState>((set) => ({
       movies: {
         ...state.movies,
         savedMovies: [...state.movies.savedMovies, movie]
+      }
+    })),
+  updateMovieByGenre: (movieByGenre: Movie[]) =>
+    set((state: IMovieStoreState) => ({
+      movies: {
+        ...state.movies,
+        movieByGenre
+      }
+    })),
+  updateCurrentGenre: (currentGenre: Genre) =>
+    set((state: IMovieStoreState) => ({
+      movies: {
+        ...state.movies,
+        currentGenre
       }
     }))
 }));
