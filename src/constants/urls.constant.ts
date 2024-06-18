@@ -7,6 +7,6 @@ export const movieUrls = {
   getSimilar: (id: string) => `/movie/${id}/recommendations`,
   searchMovie: `/search/movie`,
   genreList: "/genre/movie/list",
-  getByGenre: (genreId: number | string) =>
-    `/discover/movie?with_genres=${genreId}`
+  getByGenre: (genreId: number | string, page: number | string) =>
+    `/discover/movie?with_genres=${genreId}&page=${page}`
 };
