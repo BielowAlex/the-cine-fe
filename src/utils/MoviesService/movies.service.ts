@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { movieBaseUrl, movieUrls } from "../../constants";
 import { AxiosRes } from "@/types/common.types";
-import { Movie, MovieFull, Pagination } from "@/types/movies.types";
+import { Genre, Movie, MovieFull, Pagination } from "@/types/movies.types";
 
 export const MovieApi: AxiosInstance = axios.create({ baseURL: movieBaseUrl });
 
@@ -32,5 +32,7 @@ export const MoviesService = {
         query,
         page
       }
-    })
+    }),
+  getGenreList: (): AxiosRes<{ genres: Genre[] }> =>
+    MovieApi.get(movieUrls.genreList)
 };

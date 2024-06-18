@@ -5,5 +5,6 @@ export const movieUrls = {
   getById: (id: string) => `/movie/${id}?append_to_response=videos`,
   topRated: "/movie/top_rated",
   getSimilar: (id: string) => `/movie/${id}/recommendations`,
-  searchMovie: `/search/movie`
+  searchMovie: `/search/movie`,
+  genreList: "/genre/movie/list"
 };
