@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { movieBaseUrl, movieUrls } from "@/contants";
+import { movieBaseUrl, movieUrls } from "../../constants";
 import { AxiosRes } from "@/types/common.types";
 import { Movie, MovieFull, Pagination } from "@/types/movies.types";
 
