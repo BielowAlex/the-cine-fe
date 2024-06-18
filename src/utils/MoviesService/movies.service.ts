@@ -35,6 +35,9 @@ export const MoviesService = {
     }),
   getGenreList: (): AxiosRes<{ genres: Genre[] }> =>
     MovieApi.get(movieUrls.genreList),
-  getByGenre: (genreId: number | string): AxiosRes<Pagination<Movie[]>> =>
-    MovieApi.get(movieUrls.getByGenre(genreId))
+  getByGenre: (
+    genreId: number | string,
+    page: string | number
+  ): AxiosRes<Pagination<Movie[]>> =>
+    MovieApi.get(movieUrls.getByGenre(genreId, page))
 };
