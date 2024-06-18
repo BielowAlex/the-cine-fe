@@ -99,3 +99,8 @@ export interface Video {
 export interface Videos {
   results: Video[];
 }
+
+export interface Genre {
+  id: number;
+  name: string;
+}
