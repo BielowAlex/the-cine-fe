@@ -1,9 +1,6 @@
-"use client";
-
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { LikeButton } from "@/components/ui/LikeButton";
 import cn from "classnames";
 
 interface IProps {
@@ -14,8 +11,6 @@ interface IProps {
 }
 
 const MovieCard: FC<IProps> = ({ id, title, poster, className }) => {
-  const [isSaved, setIsSaved] = useState<boolean>(false);
-
   return (
     <div
       className={cn(
@@ -23,11 +18,6 @@ const MovieCard: FC<IProps> = ({ id, title, poster, className }) => {
         className
       )}
     >
-      <LikeButton
-        isSaved={isSaved}
-        handleClick={() => setIsSaved((prev) => !prev)}
-        className="absolute right-[15px] top-[5px] z-50"
-      />
       <Link
         href={`/movies/${id}`}
         className=" relative block min-w-full min-h-full  "

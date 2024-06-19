@@ -7,7 +7,7 @@ import { MoviesService } from "@/utils";
 import ReactPaginate from "react-paginate";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const Page = () => {
+const GenresPage = () => {
   const [page, setPage] = useState<number>(1);
   const movieList: Pagination<Movie[]> = movieStore(
     (state) => state.movies.movieByGenre
@@ -21,14 +21,12 @@ const Page = () => {
   const initialPage = searchParams.get("page") || 1;
 
   useEffect(() => {
-    console.log("render", movieList);
-
     MoviesService.getByGenre(currentGenre.id, page).then(({ data }) => {
       router.push(`${pathname}?page=${page}&genreId=${currentGenre.id}`);
 
       updateMovieList(data);
     });
-  }, [currentGenre, page, router, pathname, movieList, updateMovieList]);
+  }, [currentGenre, page, router, pathname, updateMovieList]);
 
   useEffect(() => {
     setPage(+initialPage);
@@ -54,4 +52,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default GenresPage;

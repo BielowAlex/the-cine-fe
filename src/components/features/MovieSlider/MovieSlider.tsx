@@ -12,9 +12,8 @@ interface IProps {
 }
 
 const MovieSlider: FC<IProps> = ({ title, movieList }) => {
-  console.log(movieList);
   return (
-    movieList.length > 0 && (
+    movieList?.length > 0 && (
       <div className="w-full flex flex-col justify-center items-start gap-5 relative max-h-[500px] h-full overflow-hidden select-none">
         <h2 className=" font-extrabold text-3xl">{title}:</h2>
         <Swiper
