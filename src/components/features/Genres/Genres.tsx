@@ -1,21 +1,37 @@
 "use client";
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  FC,
+  useCallback,
+  useEffect,
+  useState
+} from "react";
 import { Genre } from "@/types";
 import { MoviesService } from "@/utils";
 import { movieStore } from "@/store";
+import { useSearchParams } from "next/navigation";
 
 const Genres: FC = () => {
   const [genreList, setGenreList] = useState<Genre[]>([]);
-
   const currentGenre: Genre = movieStore((state) => state.movies.currentGenre);
   const updateCurrentGenre = movieStore((state) => state.updateCurrentGenre);
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const genreFromList = genreList.find((el) => el.id === +e.target.value);
+  const searchParams = useSearchParams();
+  const initialGenreId: string | number = searchParams.get("genreId") || 28;
 
-    if (genreFromList) {
-      updateCurrentGenre(genreFromList);
-    }
+  const updateGenre = useCallback(
+    (id: string | number) => {
+      const genreFromList = genreList.find((el) => el.id === +id);
+
+      if (genreFromList) {
+        updateCurrentGenre(genreFromList);
+      }
+    },
+    [genreList, updateCurrentGenre]
+  );
+
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    updateGenre(e.target.value);
   };
 
   useEffect(() => {
@@ -23,6 +39,10 @@ const Genres: FC = () => {
       setGenreList(data.genres);
     });
   }, []);
+
+  useEffect(() => {
+    updateGenre(initialGenreId);
+  }, [initialGenreId, updateGenre]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-5">
