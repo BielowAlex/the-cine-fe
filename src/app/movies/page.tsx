@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useEffect, useState } from "react";
+import React, { FC, memo, useEffect, useState } from "react";
 import { Button, Loader, MovieList } from "@/components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,7 +13,7 @@ import ReactPaginate from "react-paginate";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 // eslint-disable-next-line react/display-name
-const MoviesPage = memo(() => {
+const MoviesPage: FC = memo(() => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -30,8 +30,6 @@ const MoviesPage = memo(() => {
   const [search, setSearch] = useState<string>(initialQuery);
   const [page, setPage] = useState<number>(+initialPage);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  console.log(search, initialQuery);
 
   const trendingMovies = movieStore(
     (state: IMovieStoreState) => state.movies.trendingMovies
