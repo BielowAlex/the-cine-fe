@@ -42,7 +42,7 @@ const TrendingPage: FC = () => {
           <>
             <MovieList movieList={trendingMovies.results} />
             <ReactPaginate
-              pageCount={trendingMovies.total_pages}
+              pageCount={500}
               initialPage={page - 1}
               onPageChange={({ selected }) => setPage(++selected)}
               className="flex w-full justify-center items-center gap-5"

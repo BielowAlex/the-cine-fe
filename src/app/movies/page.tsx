@@ -95,7 +95,7 @@ const MoviesPage = memo(() => {
             <>
               <MovieList movieList={movieList.results} />
               <ReactPaginate
-                pageCount={movieList.total_pages}
+                pageCount={500}
                 initialPage={+initialPage - 1}
                 onPageChange={({ selected }) => setPage(++selected)}
                 className="flex w-full justify-center items-center gap-5"
