@@ -1,8 +1,6 @@
 import React, { FC } from "react";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { Button, Logo } from "@/components";
+import { Logo } from "@/components";
 
 const Header: FC = () => {
   return (
@@ -20,15 +18,14 @@ const Header: FC = () => {
             href="/movies"
             className="text-white text-base  hover:opacity-[0.5] ease-linear duration-75"
           >
-            Movies
+            Search
           </Link>
-          <Button href="/auth">
-            <span className="block w-fit whitespace-nowrap">Sign-in</span>{" "}
-            <FontAwesomeIcon
-              icon={faGoogle}
-              className="text-base w-[20px] h-[20px]"
-            />
-          </Button>
+          <Link
+            href="/trending"
+            className="text-white text-base  hover:opacity-[0.5] ease-linear duration-75"
+          >
+            Trending
+          </Link>
         </nav>
       </div>
     </header>
