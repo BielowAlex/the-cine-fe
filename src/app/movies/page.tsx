@@ -1,6 +1,6 @@
 "use client";
 import React, { memo, useEffect, useState } from "react";
-import { Button, MovieList } from "@/components";
+import { Button, Loader, MovieList } from "@/components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFaceSadTear,
@@ -29,6 +29,7 @@ const MoviesPage = memo(() => {
   });
   const [search, setSearch] = useState<string>(initialQuery);
   const [page, setPage] = useState<number>(+initialPage);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   console.log(search, initialQuery);
 
@@ -40,20 +41,26 @@ const MoviesPage = memo(() => {
   );
 
   useEffect(() => {
-    MoviesService.searchMovies(search, page).then(({ data }) => {
-      console.log(`set page ${page}`);
-      router.push(`${pathname}?page=${page}&search=${search}`);
-      setMovieList(data);
-    });
+    setIsLoading(() => true);
+    MoviesService.searchMovies(search, page)
+      .then(({ data }) => {
+        router.push(`${pathname}?page=${page}&search=${search}`);
+        setMovieList(data);
+      })
+      .finally(() => setIsLoading(() => false));
   }, [search, page, router, pathname]);
 
   useEffect(() => {
-    if (trendingMovies.length === 0) {
-      MoviesService.getTrending().then(({ data }) => {
-        updateTrendingList(data.results);
-      });
+    if (trendingMovies.total_results === 0) {
+      setIsLoading(() => true);
+
+      MoviesService.getTrending()
+        .then(({ data }) => {
+          updateTrendingList(data);
+        })
+        .finally(() => setIsLoading(() => false));
     }
-  }, [trendingMovies.length, updateTrendingList]);
+  }, [trendingMovies.total_results, updateTrendingList]);
 
   useEffect(() => {
     setPage(+initialPage);
@@ -82,31 +89,37 @@ const MoviesPage = memo(() => {
           </div>
         </div>
         {movieList.total_results > 0 ? (
-          <>
-            <MovieList movieList={movieList.results} />
-            <ReactPaginate
-              pageCount={movieList.total_pages}
-              initialPage={+initialPage - 1}
-              onPageChange={({ selected }) => setPage(++selected)}
-              className="flex w-full justify-center items-center gap-5"
-              activeLinkClassName="border border-amber-500 bg-amber-500 block"
-              pageLinkClassName="border border-amber-500 p-2 rounded-lg block"
-              nextLinkClassName="border border-amber-500 p-2 rounded-lg block"
-              previousClassName="border border-amber-500 p-2 rounded-lg block"
-            />
-          </>
+          isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <MovieList movieList={movieList.results} />
+              <ReactPaginate
+                pageCount={movieList.total_pages}
+                initialPage={+initialPage - 1}
+                onPageChange={({ selected }) => setPage(++selected)}
+                className="flex w-full justify-center items-center gap-5"
+                activeLinkClassName="border border-amber-500 bg-amber-500 block"
+                pageLinkClassName="border border-amber-500 p-2 rounded-lg block"
+                nextLinkClassName="border border-amber-500 p-2 rounded-lg block"
+                previousClassName="border border-amber-500 p-2 rounded-lg block"
+              />
+            </>
+          )
         ) : search ? (
           <div className="flex p-[250px] justify-center items-center">
             <span className="text-4xl">
               No results found <FontAwesomeIcon icon={faFaceSadTear} />
             </span>
           </div>
+        ) : isLoading ? (
+          <Loader />
         ) : (
           <>
             <div className="flex  justify-center items-center">
               <span className="text-4xl">Type something in the search bar</span>
             </div>
-            <MovieList movieList={trendingMovies} />
+            <MovieList movieList={trendingMovies.results} />
           </>
         )}
       </div>
