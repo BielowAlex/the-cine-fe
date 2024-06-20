@@ -10,6 +10,8 @@ interface IProps {
   isSaved: boolean;
 }
 
+//TODO: integrate in next version
+
 const LikeButton: FC<IProps> = ({ className, handleClick, isSaved }) => {
   return (
     <button
