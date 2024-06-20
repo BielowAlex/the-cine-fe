@@ -18,7 +18,7 @@ const Hero: FC = () => {
 
       <div className="container  w-full flex justify-center items-center h-[660px] overflow-hidden">
         <div className="z-10 w-full h-full flex relative flex-col justify-center items-center gap-5">
-          <h2 className="text-5xl font-extrabold z-10 w-1/2 text-center">
+          <h2 className="text-4xl font-extrabold z-10 w-full sm:w-1/2 sm:text-5xl text-center">
             Find and Save movies to your collection!
           </h2>
           <Button href="/movies" className="z-10 font-bold border-2 text-2xl">

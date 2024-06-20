@@ -1,10 +1,9 @@
 "use client";
-import { Genres, Loader, MovieList } from "@/components";
+import { Genres, Loader, MovieList, Paginate } from "@/components";
 import { movieStore } from "@/store";
 import { Genre, Movie, Pagination } from "@/types";
 import React, { useEffect, useState } from "react";
 import { MoviesService } from "@/utils";
-import ReactPaginate from "react-paginate";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const GenresPage = () => {
@@ -45,15 +44,10 @@ const GenresPage = () => {
         ) : (
           <>
             <MovieList movieList={movieList.results} />
-            <ReactPaginate
+            <Paginate
+              initialPage={+initialPage}
               pageCount={500}
-              initialPage={page - 1}
-              onPageChange={({ selected }) => setPage(++selected)}
-              className="flex w-full justify-center items-center gap-5"
-              activeLinkClassName="border border-amber-500 bg-amber-500 block"
-              pageLinkClassName="border border-amber-500 p-2 rounded-lg block"
-              nextLinkClassName="border border-amber-500 p-2 rounded-lg block"
-              previousClassName="border border-amber-500 p-2 rounded-lg block"
+              setPage={setPage}
             />
           </>
         )}

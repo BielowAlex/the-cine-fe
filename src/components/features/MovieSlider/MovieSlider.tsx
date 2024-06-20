@@ -14,8 +14,10 @@ interface IProps {
 const MovieSlider: FC<IProps> = ({ title, movieList }) => {
   return (
     movieList?.length > 0 && (
-      <div className="w-full flex flex-col justify-center items-start gap-5 relative max-h-[500px] h-full overflow-hidden select-none">
-        <h2 className=" font-extrabold text-3xl">{title}:</h2>
+      <div className="w-full flex flex-col jtustify-center items-start gap-5 relative max-h-[500px] h-full overflow-hidden select-none">
+        <h2 className=" font-extrabold text-xl md:text-2xl lg:text-3xl">
+          {title}:
+        </h2>
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           slidesPerView={4}
@@ -24,7 +26,7 @@ const MovieSlider: FC<IProps> = ({ title, movieList }) => {
           grabCursor={true}
           breakpoints={{
             0: {
-              slidesPerView: 1,
+              slidesPerView: 1.5,
               spaceBetween: 20
             },
             500: {
@@ -52,7 +54,7 @@ const MovieSlider: FC<IProps> = ({ title, movieList }) => {
                 id={movie.id}
                 title={movie.title}
                 poster={MoviesService.getImage(movie.poster_path)}
-                className="!w-[220px] !h-[350px]"
+                className="!w-[180px] !max-h-[300px] sm:!w-[220px] sm:!h-[350px]"
               />
             </SwiperSlide>
           ))}

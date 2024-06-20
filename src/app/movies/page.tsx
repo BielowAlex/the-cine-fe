@@ -1,6 +1,6 @@
 "use client";
 import React, { FC, memo, useEffect, useState } from "react";
-import { Button, Loader, MovieList } from "@/components";
+import { Button, Loader, MovieList, Paginate } from "@/components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFaceSadTear,
@@ -9,7 +9,6 @@ import {
 import { MoviesService } from "@/utils";
 import { Movie, Pagination as PaginationType } from "@/types";
 import { IMovieStoreState, movieStore } from "@/store";
-import ReactPaginate from "react-paginate";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 // eslint-disable-next-line react/display-name
@@ -92,15 +91,10 @@ const MoviesPage: FC = memo(() => {
           ) : (
             <>
               <MovieList movieList={movieList.results} />
-              <ReactPaginate
+              <Paginate
+                initialPage={+initialPage}
                 pageCount={500}
-                initialPage={+initialPage - 1}
-                onPageChange={({ selected }) => setPage(++selected)}
-                className="flex w-full justify-center items-center gap-5"
-                activeLinkClassName="border border-amber-500 bg-amber-500 block"
-                pageLinkClassName="border border-amber-500 p-2 rounded-lg block"
-                nextLinkClassName="border border-amber-500 p-2 rounded-lg block"
-                previousClassName="border border-amber-500 p-2 rounded-lg block"
+                setPage={setPage}
               />
             </>
           )

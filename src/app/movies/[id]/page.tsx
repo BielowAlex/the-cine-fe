@@ -10,6 +10,7 @@ import { FormatVoteNumber } from "@/utils/FormatVoteNumber";
 import Image from "next/image";
 import YouTube from "react-youtube";
 import { MovieSlider } from "@/components/features/MovieSlider";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const MoviePage: FC = () => {
   //state and variables
@@ -24,7 +25,7 @@ const MoviePage: FC = () => {
     }
   );
   const [currentTrailer, setCurrentTrailer] = useState<Video>();
-
+  const size = useWindowSize();
   //tools
   const params = useParams();
 
@@ -70,13 +71,15 @@ const MoviePage: FC = () => {
           <div className="container relative flex flex-col justify-center items-center gap-10 p-5">
             <div className="flex w-full justify-between items-center border-b pb-5">
               <div className="flex flex-col items-start gap-1">
-                <h2 className=" font-extrabold text-4xl">{movie?.title}</h2>
+                <h2 className=" font-extrabold text-xl md:text-4xl">
+                  {movie?.title}
+                </h2>
                 <span className="text-[12px] text-[rgb(128,128,128,1)]">
                   {new Date(movie?.release_date).getFullYear()} -{" "}
                   {convertMinutesToHoursMinutes(movie.runtime)}
                 </span>
               </div>
-              <div className="flex justify-center items-center gap-10">
+              <div className="flex justify-center items-center gap-10 min-w-[78px]">
                 <div className="flex flex-col items-center justify-center gap-2">
                   <span className="text-[12px] text-[rgb(128,128,128,1)]">
                     IMDb RATING
@@ -101,28 +104,28 @@ const MoviePage: FC = () => {
                     </div>
                   </div>
                 </div>
-                {/*<LikeButton*/}
-                {/*  isSaved={isSaved}*/}
-                {/*  handleClick={() => setIsSaved((prev) => !prev)}*/}
-                {/*/>*/}
               </div>
             </div>
-            <div className=" w-full flex justify-between items-start gap-10">
-              <div className="relative min-w-[320px] h-[450px] overflow-hidden">
+            <div className=" w-full flex lg:justify-between justify-center flex-wrap lg:flex-nowrap items-start gap-10">
+              <div className="relative min-w-[250px] h-[380px] md:min-w-[320px] md:h-[450px] overflow-hidden">
                 <Image
-                  width={320}
-                  height={450}
                   src={MoviesService.getImage(
                     movie.belongs_to_collection?.poster_path ||
                       movie.poster_path
                   )}
+                  layout={"fill"}
                   alt={movie.title}
                   className="object-cover w-full h-full"
                 />
               </div>
               <div className="flex flex-col w-full items-start gap-2">
                 <div className="flex justify-center items-center w-full">
-                  {currentTrailer && <YouTube videoId={currentTrailer.key} />}
+                  {currentTrailer && size.width! > 1024 && (
+                    <YouTube
+                      videoId={currentTrailer.key}
+                      iframeClassName="w-[320px] h-[240px] sm:h-[320px] sm:w-[480px] lg:w-[720px] lg:h-[480px]"
+                    />
+                  )}
                 </div>
                 <ul className="flex gap-2 flex-wrap">
                   {movie.genres.map((genre) => (
@@ -157,6 +160,15 @@ const MoviePage: FC = () => {
                     </span>
                   </li>
                 </ul>
+
+                <div className="flex justify-center items-center w-full">
+                  {currentTrailer && size.width! < 1024 && (
+                    <YouTube
+                      videoId={currentTrailer.key}
+                      iframeClassName="w-[320px] h-[240px] sm:h-[320px] sm:w-[480px] lg:w-[720px] lg:h-[480px]"
+                    />
+                  )}
+                </div>
               </div>
             </div>
             <MovieSlider

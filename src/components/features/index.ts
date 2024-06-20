@@ -6,3 +6,4 @@ export * from "./MovieList";
 export * from "./Footer";
 export * from "./Logo";
 export * from "./Genres";
+export * from "./Paginate";

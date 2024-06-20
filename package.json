@@ -24,6 +24,7 @@
     "@nextui-org/system": "^2.2.0",
     "@nextui-org/theme": "^2.2.4",
     "@types/react-slick": "^0.23.13",
+    "@uidotdev/usehooks": "^2.4.1",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
     "classnames": "^2.5.1",
