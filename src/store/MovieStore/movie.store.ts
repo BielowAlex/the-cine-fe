@@ -4,13 +4,13 @@ import { Genre, Movie, Pagination } from "@/types";
 
 export interface IMovieStoreState {
   movies: {
-    trendingMovies: Movie[];
+    trendingMovies: Pagination<Movie[]>;
     savedMovies: Movie[];
     movieByGenre: Pagination<Movie[]>;
     currentGenre: Genre;
   };
   // eslint-disable-next-line no-unused-vars
-  updateTrendingList: (newTrendingMovie: Movie[]) => void;
+  updateTrendingList: (newTrendingMovie: Pagination<Movie[]>) => void;
   // eslint-disable-next-line no-unused-vars
   updateSavedList: (savedMovies: Movie[]) => void;
   // eslint-disable-next-line no-unused-vars
@@ -23,7 +23,7 @@ export interface IMovieStoreState {
 
 export const movieStore = create<IMovieStoreState>((set) => ({
   movies: {
-    trendingMovies: [],
+    trendingMovies: { total_pages: 1, total_results: 0, page: 1, results: [] },
     savedMovies: [],
     movieByGenre: { total_pages: 1, total_results: 0, page: 1, results: [] },
     currentGenre: {
@@ -31,7 +31,7 @@ export const movieStore = create<IMovieStoreState>((set) => ({
       name: "Action"
     }
   },
-  updateTrendingList: (newTrendingMovie: Movie[]) =>
+  updateTrendingList: (newTrendingMovie: Pagination<Movie[]>) =>
     set((state: IMovieStoreState) => ({
       movies: { ...state.movies, trendingMovies: newTrendingMovie }
     })),
