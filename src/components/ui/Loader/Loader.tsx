@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 const Loader: FC = () => {
   return (
-    <div className="w-full h-svh flex justify-center items-center">
+    <div className="w-full h-svh flex justify-center items-center bg-black">
       <div
         className="inline-block h-[68px] w-[68px] animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
         role="status"
